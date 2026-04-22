@@ -68,6 +68,7 @@ interface NavProps {
 export function Nav({ accent, onRegister, sections, onNavClick }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -87,22 +88,70 @@ export function Nav({ accent, onRegister, sections, onNavClick }: NavProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, [sections]);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add("pmj-nav-open");
+    } else {
+      document.body.classList.remove("pmj-nav-open");
+    }
+  }, [mobileMenuOpen]);
+
+  const handleNavClick = (id: string) => {
+    onNavClick(id);
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <header style={{position: "fixed", top: 0, left: 0, right: 0, zIndex: 40, padding: scrolled ? "14px 40px" : "24px 40px", transition: "all .35s cubic-bezier(.2,.8,.2,1)", background: scrolled ? "rgba(10,16,2,.86)" : "transparent", backdropFilter: scrolled ? "blur(14px) saturate(140%)" : "none", WebkitBackdropFilter: scrolled ? "blur(14px) saturate(140%)" : "none" as any, borderBottom: scrolled ? "1px solid rgba(238,255,215,.08)" : "1px solid transparent",}}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", gap: 40 }}>
-        <a href="#top" onClick={(e)=>{e.preventDefault(); onNavClick("top");}} style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
+    <header style={{position: "fixed", top: 0, left: 0, right: 0, zIndex: 40, padding: scrolled ? "14px 20px" : "24px 20px", transition: "all .35s cubic-bezier(.2,.8,.2,1)", background: scrolled ? "rgba(10,16,2,.86)" : "transparent", backdropFilter: scrolled ? "blur(14px) saturate(140%)" : "none", WebkitBackdropFilter: scrolled ? "blur(14px) saturate(140%)" : "none" as any, borderBottom: scrolled ? "1px solid rgba(238,255,215,.08)" : "1px solid transparent",}}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", gap: 20, paddingLeft: 0, paddingRight: 0 }}>
+        <a href="#top" onClick={(e)=>{e.preventDefault(); handleNavClick("top");}} style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none", minWidth: 0 }}>
           <img src="/assets/pamoja_logo.png" alt="PAMOJA" style={{ height: 24, width: "auto", display: "block" }} />
-          <span style={{color: "rgba(238,255,215,.55)", fontFamily: "Montserrat", fontWeight: 600, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", paddingLeft: 14, borderLeft: "1px solid rgba(238,255,215,.18)",}}>Africa V · 2028</span>
+          <span style={{color: "rgba(238,255,215,.55)", fontFamily: "Montserrat", fontWeight: 600, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", paddingLeft: 14, borderLeft: "1px solid rgba(238,255,215,.18)", display: "none"}} className="pamoja-logo-text">Africa V · 2028</span>
         </a>
         <nav style={{ display: "flex", gap: 4, marginLeft: "auto", alignItems: "center" }} className="pamoja-nav-links">
           {sections.map((s) => {
             const isActive = active === s.id;
-            return <a key={s.id} href={`#${s.id}`} onClick={(e) => { e.preventDefault(); onNavClick(s.id); }} style={{padding: "10px 14px", borderRadius: 999, textDecoration: "none", fontFamily: "Montserrat", fontWeight: 500, fontSize: 13, color: isActive ? "#22350A" : "#EEFFD7", background: isActive ? accent : "transparent", transition: "all .25s ease",}}>{s.label}</a>;
+            return <a key={s.id} href={`#${s.id}`} onClick={(e) => { e.preventDefault(); handleNavClick(s.id); }} style={{padding: "10px 14px", borderRadius: 999, textDecoration: "none", fontFamily: "Montserrat", fontWeight: 500, fontSize: 13, color: isActive ? "#22350A" : "#EEFFD7", background: isActive ? accent : "transparent", transition: "all .25s ease",}}>{s.label}</a>;
           })}
         </nav>
-        <button onClick={onRegister} style={{border: 0, cursor: "pointer", padding: "12px 22px", borderRadius: 14, background: "#EA7F1D", color: "#fff", fontFamily: "Montserrat", fontWeight: 700, fontSize: 14, letterSpacing: "0.04em", display: "inline-flex", alignItems: "center", gap: 10, boxShadow: "0 10px 30px -12px rgba(234,127,29,.6)", textTransform: "uppercase",}}>Register Now <IconArrow size={16} /></button>
+        <button onClick={() => { onRegister(); setMobileMenuOpen(false); }} style={{border: 0, cursor: "pointer", padding: scrolled ? "10px 18px" : "12px 22px", borderRadius: 14, background: "#EA7F1D", color: "#fff", fontFamily: "Montserrat", fontWeight: 700, fontSize: scrolled ? 12 : 14, letterSpacing: "0.04em", display: "inline-flex", alignItems: "center", gap: 10, boxShadow: "0 10px 30px -12px rgba(234,127,29,.6)", textTransform: "uppercase", transition: "all .25s ease", whiteSpace: "nowrap",}}>Register Now <IconArrow size={16} /></button>
+
+        <button className="pmj-nav-hamburger" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{border: 0, background: "transparent", cursor: "pointer", padding: "8px", display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#EEFFD7"}}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 12h18M3 6h18M3 18h18" />
+          </svg>
+        </button>
       </div>
-      <style>{`@media (max-width: 1050px) { .pamoja-nav-links { display: none !important; } }`}</style>
+
+      <div className={`pmj-nav-overlay ${mobileMenuOpen ? "open" : ""}`}>
+        <button className="pmj-nav-overlay-close" onClick={() => setMobileMenuOpen(false)}>
+          <IconX size={24} />
+        </button>
+        <nav style={{ display: "flex", flexDirection: "column", gap: 0, marginTop: 40 }}>
+          {sections.map((s) => (
+            <a key={s.id} href={`#${s.id}`} onClick={(e) => { e.preventDefault(); handleNavClick(s.id); }} style={{padding: "16px 20px", textDecoration: "none", fontFamily: "Montserrat", fontWeight: 500, fontSize: 16, color: "#EEFFD7", transition: "all .25s ease", borderRadius: 12, margin: "8px 0"}}>
+              {s.label}
+            </a>
+          ))}
+        </nav>
+        <button onClick={() => { onRegister(); setMobileMenuOpen(false); }} style={{border: 0, cursor: "pointer", padding: "16px 20px", borderRadius: 12, background: "#EA7F1D", color: "#fff", fontFamily: "Montserrat", fontWeight: 700, fontSize: 14, letterSpacing: "0.04em", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 10, textTransform: "uppercase", width: "100%", marginTop: 20}}>Register Now <IconArrow size={16} /></button>
+      </div>
+
+      <style>{`
+        @media (max-width: 1050px) {
+          .pamoja-nav-links {
+            display: none !important;
+          }
+        }
+        @media (min-width: 1051px) {
+          .pmj-nav-hamburger {
+            display: none !important;
+          }
+          .pmj-nav-overlay {
+            display: none !important;
+          }
+        }
+      `}</style>
     </header>
   );
 }

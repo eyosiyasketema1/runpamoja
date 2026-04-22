@@ -44,7 +44,7 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
   ];
 
   return (
-    <section id="agenda" style={{
+    <section id="agenda" className="pmj-agenda" style={{
       background: '#EEFFD7', color: '#22350A',
       padding: '140px 80px 160px', position: 'relative', overflow: 'hidden',
     }}>

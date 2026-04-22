@@ -29,9 +29,9 @@ function SectionHeader({ kicker, title, accent, dark, align = 'left', maxWidth =
 
 function WhatIs({ data, accent }: { data: PamojaData; accent: string }) {
   return (
-    <section id="about" style={{ background: '#EEFFD7', color: '#22350A', padding: '140px 80px', position: 'relative' }}>
+    <section id="about" className="pmj-section" style={{ background: '#EEFFD7', color: '#22350A', position: 'relative' }}>
       <DotGrid color="rgba(34,53,10,.08)" gap={22} />
-      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 80, alignItems: 'start' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 80, alignItems: 'start' }} className="pmj-whatIs-grid">
         <div style={{ position: 'sticky', top: 120 }}>
           <SectionHeader kicker="About" title={data.whatIs.title} accent={'#5C8727'} />
         </div>
@@ -42,7 +42,7 @@ function WhatIs({ data, accent }: { data: PamojaData; accent: string }) {
           <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 18, lineHeight: 1.6, color: 'rgba(34,53,10,.75)', textWrap: 'pretty' }}>
             {data.whatIs.body2}
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 48 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 48 }} className="pmj-stats-grid">
             {[
               { k: '4', v: 'Continental gatherings since 2006' },
               { k: '34+', v: 'African nations at Pamoja IV' },
@@ -65,9 +65,9 @@ function Vision({ data, accent }: { data: PamojaData; accent: string }) {
     <section id="vision" style={{
       background: '#0A1002', color: '#EEFFD7',
       padding: '140px 0 0', position: 'relative', overflow: 'hidden',
-    }}>
+    }} className="pmj-vision-section">
       <DotGrid color="rgba(141,207,61,.08)" gap={22} />
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 80px', position: 'relative' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 80px', position: 'relative' }} className="pmj-vision-header">
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
           <span style={{ width: 32, height: 1, background: accent }} />
           <span style={{ fontFamily: 'Montserrat', fontSize: 12, fontWeight: 600, letterSpacing: '0.24em', color: accent, textTransform: 'uppercase' }}>
@@ -86,7 +86,7 @@ function Vision({ data, accent }: { data: PamojaData; accent: string }) {
         position: 'relative',
         maxWidth: 1440, margin: '24px auto 0',
         minHeight: 820,
-      }}>
+      }} className="pmj-vision-bg">
         <img src="assets/theme_africa_bg.png?v=2" alt=""
           style={{
             position: 'absolute', inset: 0,
@@ -103,7 +103,7 @@ function Vision({ data, accent }: { data: PamojaData; accent: string }) {
           gap: 40, alignItems: 'center',
           padding: '0 80px 140px',
           minHeight: 820,
-        }}>
+        }} className="pmj-vision-grid">
           <div>
             <div style={{
               fontFamily: 'Montserrat', fontSize: 10,
@@ -158,12 +158,12 @@ function Vision({ data, accent }: { data: PamojaData; accent: string }) {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 80px 140px', position: 'relative' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 80px 140px', position: 'relative' }} className="pmj-vision-footer">
         <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',
           gap: 2, background: 'rgba(238,255,215,.12)',
           border: '1px solid rgba(238,255,215,.12)',
-        }}>
+        }} className="pmj-pillars-grid">
           {data.vision.pillars.map((p, i) => (
             <div key={i} style={{ background: '#0A1002', padding: '48px 36px', minHeight: 260 }}>
               <div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: 72, color: accent, lineHeight: 1, fontWeight: 400 }}>{p.num}</div>
@@ -179,15 +179,15 @@ function Vision({ data, accent }: { data: PamojaData; accent: string }) {
 
 function Conferences({ data, accent: _accent, onRegister }: { data: PamojaData; accent: string; onRegister: (confId: string) => void }) {
   return (
-    <section id="conferences" style={{ background: '#EEFFD7', color: '#22350A', padding: '140px 80px' }}>
+    <section id="conferences" className="pmj-section" style={{ background: '#EEFFD7', color: '#22350A' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 80, alignItems: 'end', marginBottom: 56 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 80, alignItems: 'end', marginBottom: 56 }} className="pmj-conf-header">
           <SectionHeader kicker="Two Conferences" title={'One venue.\nBack-to-back.'} accent={'#5C8727'} />
           <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 18, lineHeight: 1.55, color: 'rgba(34,53,10,.7)', margin: 0, textWrap: 'pretty' }}>
             Pamoja V brings together two distinct gatherings at the Addis Ababa Convention Center — first the main Pamoja Conference for delegates, immediately followed by a dedicated Staff Conference.
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }} className="pmj-conf-cards">
           {data.conferences.map((c, i) => (
             <div key={c.id} style={{
               background: i === 0 ? '#22350A' : '#fff',
@@ -241,9 +241,8 @@ function Objectives({ data, accent }: { data: PamojaData; accent: string }) {
   const cur = items[active];
 
   return (
-    <section id="objectives" style={{
-      background: '#0A1002', color: '#EEFFD7',
-      padding: '160px 80px', position: 'relative', overflow: 'hidden',
+    <section id="objectives" className="pmj-section" style={{
+      background: '#0A1002', color: '#EEFFD7', position: 'relative', overflow: 'hidden',
     }}>
       <div aria-hidden style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 1,
@@ -255,7 +254,7 @@ function Objectives({ data, accent }: { data: PamojaData; accent: string }) {
           display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
           paddingBottom: 28, borderBottom: '1px solid rgba(238,255,215,.1)',
           marginBottom: 80,
-        }}>
+        }} className="pmj-obj-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <span style={{ width: 6, height: 6, borderRadius: 999, background: accent }} />
             <span style={{
@@ -286,7 +285,7 @@ function Objectives({ data, accent }: { data: PamojaData; accent: string }) {
           marginTop: 80,
           display: 'grid', gridTemplateColumns: '1.1fr 1fr',
           gap: 80, alignItems: 'start',
-        }}>
+        }} className="pmj-obj-grid">
           <ol style={{
             listStyle: 'none', margin: 0, padding: 0,
             borderTop: '1px solid rgba(238,255,215,.1)',
@@ -530,7 +529,7 @@ function SpeakerCard({ sp, idx }: { sp: any; idx: number }) {
 
 function Speakers({ data, accent: _accent }: { data: PamojaData; accent: string }) {
   return (
-    <section id="speakers" style={{ background: '#EEFFD7', color: '#22350A', padding: '140px 80px', position: 'relative', overflow: 'hidden' }}>
+    <section id="speakers" className="pmj-section" style={{ background: '#EEFFD7', color: '#22350A', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginBottom: 36 }}>
           <span style={{ width: 32, height: 1, background: '#5C8727' }} />
@@ -555,7 +554,7 @@ function Speakers({ data, accent: _accent }: { data: PamojaData; accent: string 
           Our speaker line-up is being confirmed and will be announced here in the coming months. Register now to be notified.
         </p>
 
-        <div style={{ marginTop: 64, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+        <div style={{ marginTop: 64, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }} className="pmj-speakers-grid">
           {data.speakers.slice(0, 6).map((sp, i) => <SpeakerCard key={i} sp={sp} idx={i} />)}
         </div>
       </div>
@@ -567,7 +566,7 @@ function History({ data, accent }: { data: PamojaData; accent: string }) {
   const [expanded, setExpanded] = useState(data.history.length - 1);
 
   return (
-    <section id="history" style={{ background: '#0A1002', color: '#EEFFD7', padding: '160px 80px', position: 'relative', overflow: 'hidden' }}>
+    <section id="history" className="pmj-section" style={{ background: '#0A1002', color: '#EEFFD7', position: 'relative', overflow: 'hidden' }}>
       <DotGrid color="rgba(141,207,61,.08)" gap={22} />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
         <SectionHeader kicker="History" title={'Two decades\nof togetherness.'} accent={accent} dark />
@@ -651,7 +650,7 @@ function FAQ({ data, accent }: { data: PamojaData; accent: string }) {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" style={{ background: '#EEFFD7', color: '#22350A', padding: '140px 80px' }}>
+    <section id="faq" className="pmj-section" style={{ background: '#EEFFD7', color: '#22350A' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <SectionHeader kicker="FAQ" title={'Questions we\nget asked.'} accent={'#5C8727'} />
         <div style={{ marginTop: 64, borderTop: '1px solid rgba(34,53,10,.12)' }}>
@@ -689,8 +688,8 @@ function FAQ({ data, accent }: { data: PamojaData; accent: string }) {
 
 function RegisterBand({ onRegister, accent, data }: { onRegister: () => void; accent: string; data: PamojaData }) {
   return (
-    <section id="register" style={{ background: 'url(assets/register_band_bg.png) center / cover no-repeat, #EA7F1D', color: '#fff', padding: '120px 80px', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 60, alignItems: 'center' }}>
+    <section id="register" className="pmj-section" style={{ background: 'url(assets/register_band_bg.png) center / cover no-repeat, #EA7F1D', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 60, alignItems: 'center' }} className="pmj-register-grid">
         <div>
           <div style={{ fontFamily: 'Montserrat', fontSize: 12, letterSpacing: '0.24em', color: 'rgba(255,255,255,.7)', fontWeight: 600, textTransform: 'uppercase', marginBottom: 20 }}>
             Pamoja Africa V · {data.event.datesShort}
@@ -725,9 +724,9 @@ function RegisterBand({ onRegister, accent, data }: { onRegister: () => void; ac
 
 function Footer({ data: _data, accent, onNavClick }: { data: PamojaData; accent: string; onNavClick: (id: string) => void }) {
   return (
-    <footer style={{ background: '#0A1002', color: '#EEFFD7', padding: '80px 80px 40px' }}>
+    <footer style={{ background: '#0A1002', color: '#EEFFD7', padding: '80px 80px 40px' }} className="pmj-footer">
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 60, paddingBottom: 60, borderBottom: '1px solid rgba(238,255,215,.12)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 60, paddingBottom: 60, borderBottom: '1px solid rgba(238,255,215,.12)' }} className="pmj-footer-grid">
           <div>
             <div style={{ marginBottom: 24 }}>
               <img src="assets/pamoja_logo_footer.png" alt="PAMOJA" style={{ height: 44, width: 'auto', display: 'block' }} />

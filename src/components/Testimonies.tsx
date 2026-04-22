@@ -61,6 +61,7 @@ function Testimonies({ data, accent }: { data: PamojaData; accent: string }) {
         position: "relative",
         overflow: "hidden",
       }}
+      className="pmj-testimonies"
     >
       <div
         aria-hidden

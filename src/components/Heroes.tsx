@@ -14,7 +14,7 @@ export function HeroConservative({ accent, onRegister, data }: HeroProps) {
       position: "relative", minHeight: "100vh",
       display: "grid", gridTemplateColumns: "1.1fr 1fr",
       background: "#0A1002", color: "#EEFFD7", overflow: "hidden",
-    } as React.CSSProperties}>
+    } as React.CSSProperties} className="pmj-hero-conservative">
       <DotGrid color="rgba(141,207,61,.08)" />
       <div style={{ position: "relative", padding: "160px 80px 80px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
         <div>
@@ -198,9 +198,8 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
         borderTopLeftRadius: 4, borderBottomLeftRadius: 4,
         zIndex: 3,
       } as React.CSSProperties}>Register · Arise Africa</div>
-      <div style={{
+      <div className="pmj-hero-bold-section" style={{
         position: "relative", zIndex: 2,
-        padding: "160px 80px 32px",
         maxWidth: 1440, margin: "0 auto",
         minHeight: "min(100vh, 980px)",
         display: "flex", flexDirection: "column", justifyContent: "space-between",
@@ -236,7 +235,7 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
           gridTemplateColumns: "1fr 1fr",
           gap: 64, alignItems: "start",
           paddingTop: 36,
-        }}>
+        }} className="pmj-hero-bold-grid">
           <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
             <a href="#speakers" style={{ textDecoration: "none", color: "inherit", display: "inline-flex", alignItems: "center", gap: 18 }}>
               <div style={{ display: "flex" }}>
@@ -313,9 +312,8 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
         }}>
           {[...marqueeItems, ...marqueeItems].map((w, i) => (
             <span key={i} style={{ display: "inline-flex", alignItems: "center", paddingRight: 80 }}>
-              <span style={{
+              <span className="pmj-marquee-text" style={{
                 fontFamily: "Montserrat", fontWeight: 800,
-                fontSize: "clamp(64px, 9vw, 140px)",
                 letterSpacing: "-0.03em", color: "#EEFFD7",
                 textTransform: "uppercase", lineHeight: 1,
               }}>{w}</span>
