@@ -220,10 +220,20 @@ button { font-family: inherit; }
     top: auto !important;
     padding: 0 !important;
   }
-  /* Vision section — the big Africa-map background fills the whole stacked column on mobile,
-     creating an enormous visual gap between "The call" and the Isaiah verse. Hide it. */
+  /* Vision section — flow the Africa-map image inline (no longer an absolute background),
+     placed between the headline and the text columns. Hide the empty middle grid cell so
+     the two text blocks sit closer together. Verse left-aligns. */
   .pmj-vision-bgimg {
-    display: none !important;
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 24px 0 8px !important;
+    object-fit: contain !important;
+  }
+  .pmj-vision-bg {
+    min-height: auto !important;
+    padding: 0 16px !important;
   }
   .pmj-vision-spacer {
     display: none !important;
@@ -233,6 +243,26 @@ button { font-family: inherit; }
   }
   .pmj-vision-verse > div:first-child {
     justify-content: flex-start !important;
+  }
+  /* "Arise · Shine · Go" was absolutely positioned at the bottom of the bg layer; let it flow */
+  .pmj-vision-bg > div:last-child {
+    position: static !important;
+    transform: none !important;
+    text-align: center !important;
+    margin-top: 32px !important;
+    bottom: auto !important;
+    left: auto !important;
+  }
+}
+@media (max-width: 640px) {
+  .pmj-vision-header {
+    padding: 0 16px !important;
+  }
+  .pmj-vision-grid {
+    padding: 0 0 32px !important;
+  }
+  .pmj-vision-footer {
+    padding: 0 16px 64px !important;
   }
 }
 @media (max-width: 640px) {
