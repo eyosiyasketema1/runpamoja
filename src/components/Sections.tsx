@@ -88,6 +88,7 @@ function Vision({ data, accent }: { data: PamojaData; accent: string }) {
         minHeight: 820,
       }} className="pmj-vision-bg">
         <img src="assets/theme_africa_bg.png?v=2" alt=""
+          className="pmj-vision-bgimg"
           style={{
             position: 'absolute', inset: 0,
             width: '100%', height: '100%',
@@ -121,9 +122,9 @@ function Vision({ data, accent }: { data: PamojaData; accent: string }) {
             }}>{data.vision.body}</p>
           </div>
 
-          <div />
+          <div className="pmj-vision-spacer" />
 
-          <div style={{ textAlign: 'right' }}>
+          <div className="pmj-vision-verse" style={{ textAlign: 'right' }}>
             <div style={{
               fontFamily: 'Montserrat', fontSize: 10,
               letterSpacing: '0.3em', fontWeight: 700,

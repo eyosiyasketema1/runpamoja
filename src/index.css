@@ -220,6 +220,20 @@ button { font-family: inherit; }
     top: auto !important;
     padding: 0 !important;
   }
+  /* Vision section — the big Africa-map background fills the whole stacked column on mobile,
+     creating an enormous visual gap between "The call" and the Isaiah verse. Hide it. */
+  .pmj-vision-bgimg {
+    display: none !important;
+  }
+  .pmj-vision-spacer {
+    display: none !important;
+  }
+  .pmj-vision-verse {
+    text-align: left !important;
+  }
+  .pmj-vision-verse > div:first-child {
+    justify-content: flex-start !important;
+  }
 }
 @media (max-width: 640px) {
   /* Section titles — scale down on phones so they don't dominate the screen */
