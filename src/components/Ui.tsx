@@ -116,8 +116,8 @@ export function Nav({ accent, onRegister, sections, onNavClick }: NavProps) {
         </nav>
         <button className="pmj-nav-register-btn" onClick={() => { onRegister(); setMobileMenuOpen(false); }} style={{border: 0, cursor: "pointer", padding: scrolled ? "10px 18px" : "12px 22px", borderRadius: 14, background: "#EA7F1D", color: "#fff", fontFamily: "Montserrat", fontWeight: 700, fontSize: scrolled ? 12 : 14, letterSpacing: "0.04em", display: "inline-flex", alignItems: "center", gap: 10, boxShadow: "0 10px 30px -12px rgba(234,127,29,.6)", textTransform: "uppercase", transition: "all .25s ease", whiteSpace: "nowrap",}}>Register Now <IconArrow size={16} /></button>
 
-        <button className="pmj-nav-hamburger" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{border: 0, background: "transparent", cursor: "pointer", padding: "8px", display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#EEFFD7"}}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <button className="pmj-nav-hamburger" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{border: 0, background: "transparent", cursor: "pointer", padding: "8px", marginLeft: "auto", display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#EEFFD7"}}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 12h18M3 6h18M3 18h18" />
           </svg>
         </button>
