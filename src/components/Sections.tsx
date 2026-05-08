@@ -236,6 +236,94 @@ function Conferences({ data, accent: _accent, onRegister }: { data: PamojaData; 
   );
 }
 
+type ObjectiveItem = PamojaData['objectives'][number];
+
+function ObjectiveDetail({ item, index, accent }: { item: ObjectiveItem; index: number; accent: string }) {
+  return (
+    <div key={index} style={{ animation: 'obj-fade .5s cubic-bezier(.2,.8,.2,1) both' }}>
+      <div style={{
+        display: 'inline-flex', alignItems: 'center', gap: 10,
+        padding: '8px 14px', borderRadius: 999,
+        background: 'rgba(141,207,61,.1)',
+        border: '1px solid rgba(141,207,61,.25)',
+        marginBottom: 24,
+      }}>
+        <span style={{ width: 6, height: 6, borderRadius: 999, background: accent }} />
+        <span style={{
+          fontFamily: 'Montserrat', fontSize: 10,
+          letterSpacing: '0.26em', fontWeight: 700,
+          color: accent, textTransform: 'uppercase',
+        }}>Objective {String(index + 1).padStart(2, '0')}</span>
+      </div>
+
+      <h3 style={{
+        margin: 0, fontFamily: 'Montserrat', fontWeight: 700,
+        fontSize: 'clamp(24px, 3.2vw, 44px)', lineHeight: 1.15,
+        letterSpacing: '-0.025em', color: '#EEFFD7',
+        textWrap: 'balance',
+      } as CSSProperties}>{item.title}</h3>
+
+      <p style={{
+        margin: '20px 0 0', fontFamily: 'Inter, sans-serif',
+        fontSize: 16, lineHeight: 1.6,
+        color: 'rgba(238,255,215,.75)', textWrap: 'pretty',
+        maxWidth: 520,
+      } as CSSProperties}>{item.body}</p>
+
+      {item.metrics && (
+        <div style={{ marginTop: 32 }}>
+          <div style={{
+            fontFamily: 'Montserrat', fontSize: 10,
+            letterSpacing: '0.26em', fontWeight: 700,
+            color: 'rgba(238,255,215,.45)', textTransform: 'uppercase',
+            marginBottom: 16,
+          }}>Targets by June 2028</div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: item.metrics.length === 4 ? 'repeat(2, 1fr)' : `repeat(${item.metrics.length}, 1fr)`,
+            gap: 0,
+            border: '1px solid rgba(238,255,215,.1)',
+            borderRadius: 14, overflow: 'hidden',
+          }}>
+            {item.metrics.map((m, j) => (
+              <div key={j} style={{
+                padding: '20px 16px',
+                background: j % 2 === 0 ? 'rgba(238,255,215,.02)' : 'transparent',
+                borderRight: j < (item.metrics?.length ?? 0) - 1 && ((item.metrics?.length ?? 0) !== 4 || j % 2 === 0) ? '1px solid rgba(238,255,215,.1)' : 'none',
+                borderBottom: (item.metrics?.length ?? 0) === 4 && j < 2 ? '1px solid rgba(238,255,215,.1)' : 'none',
+              }}>
+                <div style={{
+                  fontFamily: 'Montserrat', fontWeight: 700,
+                  fontSize: 32, lineHeight: 1,
+                  letterSpacing: '-0.03em', color: accent,
+                }}>{m.v}</div>
+                <div style={{
+                  marginTop: 6, fontFamily: 'Inter, sans-serif',
+                  fontSize: 12, lineHeight: 1.3,
+                  color: 'rgba(238,255,215,.6)',
+                }}>{m.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!item.metrics && (
+        <div style={{
+          marginTop: 32, padding: '20px 22px',
+          border: '1px dashed rgba(238,255,215,.15)',
+          borderRadius: 14,
+          fontFamily: "'Fraunces', serif", fontStyle: 'italic',
+          fontSize: 15, lineHeight: 1.5,
+          color: 'rgba(238,255,215,.55)', maxWidth: 520,
+        }}>
+          Qualitative objective — measured by partner churches, training cohorts, and on-the-ground movement reports.
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Objectives({ data, accent }: { data: PamojaData; accent: string }) {
   const [active, setActive] = useState(0);
   const items = data.objectives;
@@ -337,12 +425,20 @@ function Objectives({ data, accent }: { data: PamojaData; accent: string }) {
                       </svg>
                     </span>
                   </button>
+                  {isActive && (
+                    <div className="pmj-obj-mobile-detail" style={{
+                      padding: '8px 0 32px',
+                      borderBottom: '1px solid rgba(238,255,215,.1)',
+                    }}>
+                      <ObjectiveDetail item={o} index={i} accent={accent} />
+                    </div>
+                  )}
                 </li>
               );
             })}
           </ol>
 
-          <div className="pmj-sticky-col" style={{
+          <div className="pmj-sticky-col pmj-obj-desktop-detail" style={{
             position: 'sticky', top: 120,
             padding: '40px 0',
           }}>
@@ -357,89 +453,7 @@ function Objectives({ data, accent }: { data: PamojaData; accent: string }) {
             </div>
 
             <div style={{ position: 'relative' }}>
-              <div key={active} style={{
-                animation: 'obj-fade .5s cubic-bezier(.2,.8,.2,1) both',
-              }}>
-                <div style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 10,
-                  padding: '8px 14px', borderRadius: 999,
-                  background: 'rgba(141,207,61,.1)',
-                  border: '1px solid rgba(141,207,61,.25)',
-                  marginBottom: 32,
-                }}>
-                  <span style={{ width: 6, height: 6, borderRadius: 999, background: accent }} />
-                  <span style={{
-                    fontFamily: 'Montserrat', fontSize: 10,
-                    letterSpacing: '0.26em', fontWeight: 700,
-                    color: accent, textTransform: 'uppercase',
-                  }}>Objective {String(active + 1).padStart(2, '0')}</span>
-                </div>
-
-                <h3 style={{
-                  margin: 0, fontFamily: 'Montserrat', fontWeight: 700,
-                  fontSize: 'clamp(28px, 3.2vw, 44px)', lineHeight: 1.1,
-                  letterSpacing: '-0.025em', color: '#EEFFD7',
-                  textWrap: 'balance',
-                }}>{cur.title}</h3>
-
-                <p style={{
-                  margin: '24px 0 0', fontFamily: 'Inter, sans-serif',
-                  fontSize: 17, lineHeight: 1.6,
-                  color: 'rgba(238,255,215,.75)', textWrap: 'pretty',
-                  maxWidth: 520,
-                }}>{cur.body}</p>
-
-                {cur.metrics && (
-                  <div style={{ marginTop: 40 }}>
-                    <div style={{
-                      fontFamily: 'Montserrat', fontSize: 10,
-                      letterSpacing: '0.26em', fontWeight: 700,
-                      color: 'rgba(238,255,215,.45)', textTransform: 'uppercase',
-                      marginBottom: 20,
-                    }}>Targets by June 2028</div>
-                    <div style={{
-                      display: 'grid',
-                      gridTemplateColumns: cur.metrics.length === 4 ? 'repeat(2, 1fr)' : `repeat(${cur.metrics.length}, 1fr)`,
-                      gap: 0,
-                      border: '1px solid rgba(238,255,215,.1)',
-                      borderRadius: 14, overflow: 'hidden',
-                    }}>
-                      {cur.metrics?.map((m, j) => (
-                        <div key={j} style={{
-                          padding: '22px 20px',
-                          background: j % 2 === 0 ? 'rgba(238,255,215,.02)' : 'transparent',
-                          borderRight: j < (cur.metrics?.length ?? 0) - 1 && ((cur.metrics?.length ?? 0) !== 4 || j % 2 === 0) ? '1px solid rgba(238,255,215,.1)' : 'none',
-                          borderBottom: (cur.metrics?.length ?? 0) === 4 && j < 2 ? '1px solid rgba(238,255,215,.1)' : 'none',
-                        }}>
-                          <div style={{
-                            fontFamily: 'Montserrat', fontWeight: 700,
-                            fontSize: 36, lineHeight: 1,
-                            letterSpacing: '-0.03em', color: accent,
-                          }}>{m.v}</div>
-                          <div style={{
-                            marginTop: 8, fontFamily: 'Inter, sans-serif',
-                            fontSize: 12, lineHeight: 1.3,
-                            color: 'rgba(238,255,215,.6)',
-                          }}>{m.l}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {!cur.metrics && (
-                  <div style={{
-                    marginTop: 40, padding: '24px 28px',
-                    border: '1px dashed rgba(238,255,215,.15)',
-                    borderRadius: 14,
-                    fontFamily: "'Fraunces', serif", fontStyle: 'italic',
-                    fontSize: 15, lineHeight: 1.5,
-                    color: 'rgba(238,255,215,.55)', maxWidth: 520,
-                  }}>
-                    Qualitative objective — measured by partner churches, training cohorts, and on-the-ground movement reports.
-                  </div>
-                )}
-              </div>
+              <ObjectiveDetail item={cur} index={active} accent={accent} />
             </div>
           </div>
         </div>

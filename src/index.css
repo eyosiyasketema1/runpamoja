@@ -269,6 +269,19 @@ button { font-family: inherit; }
     padding: 0 16px 64px !important;
   }
 }
+
+/* Objectives — swap which detail panel shows at each breakpoint.
+   Desktop: single sticky panel on the right.
+   Tablet/mobile: each list item expands inline below itself when active. */
+.pmj-obj-mobile-detail { display: none; }
+@media (max-width: 1024px) {
+  .pmj-obj-mobile-detail {
+    display: block !important;
+  }
+  .pmj-obj-desktop-detail {
+    display: none !important;
+  }
+}
 @media (max-width: 640px) {
   /* Section titles — scale down on phones so they don't dominate the screen */
   .pmj-section h2,
