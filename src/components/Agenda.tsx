@@ -29,10 +29,16 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
   const [dayIdx, setDayIdx] = useState(0);
   const [hoverSess, setHoverSess] = useState<number | null>(null);
   const stripRef = useRef<HTMLDivElement>(null);
+  const activeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setDayIdx(0);
   }, [conf]);
+
+  // Auto-scroll the active day into view in the horizontal strip on mobile.
+  useEffect(() => {
+    activeBtnRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }, [dayIdx, conf]);
 
   const schedule = data.agenda[conf];
   const days = schedule.days;
@@ -49,7 +55,7 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
       padding: '140px 80px 160px', position: 'relative', overflow: 'hidden',
     }}>
       <div style={{ position: 'relative', maxWidth: 1440, margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap', marginBottom: 48 }}>
+        <div className="pmj-agenda-header-row" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap', marginBottom: 48 }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
               <span style={{ width: 32, height: 1, background: '#5C8727' }} />
@@ -68,7 +74,7 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
             </h2>
           </div>
 
-          <div style={{
+          <div className="pmj-agenda-conf-tabs" style={{
             display: 'inline-flex', padding: 6, borderRadius: 999,
             background: '#22350A', boxShadow: '0 18px 40px -20px rgba(34,53,10,.4)',
           }}>
@@ -105,7 +111,7 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
           <span>· {schedule.sub}</span>
         </div>
 
-        <div ref={stripRef} style={{
+        <div ref={stripRef} className="pmj-agenda-day-strip" style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${days.length}, minmax(0, 1fr))`,
           gap: 8, marginBottom: 40,
@@ -113,7 +119,7 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
           {days.map((d, i) => {
             const active = dayIdx === i;
             return (
-              <button key={i} onClick={() => setDayIdx(i)} style={{
+              <button key={i} ref={active ? activeBtnRef : null} onClick={() => setDayIdx(i)} style={{
                 all: 'unset' as const, cursor: 'pointer',
                 padding: '18px 14px 18px',
                 borderRadius: 12,
@@ -152,23 +158,23 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
           })}
         </div>
 
-        <div key={conf + '-' + dayIdx} style={{
+        <div key={conf + '-' + dayIdx} className="pmj-agenda-day-card" style={{
           background: '#22350A', color: '#EEFFD7',
           borderRadius: 24, overflow: 'hidden',
           animation: 'agenda-swap .5s cubic-bezier(.2,.8,.2,1) both',
         }}>
-          <div style={{
+          <div className="pmj-agenda-day-header" style={{
             display: 'grid', gridTemplateColumns: 'auto 1fr auto',
             gap: 32, alignItems: 'center',
             padding: '36px 44px',
             borderBottom: '1px solid rgba(238,255,215,.1)',
           }}>
-            <div style={{
+            <div className="pmj-agenda-day-num" style={{
               fontFamily: "'Fraunces', serif", fontStyle: 'italic',
               fontWeight: 200, fontSize: 88, lineHeight: 1,
               color: schedule.color,
             }}>{String(dayIdx + 1).padStart(2, '0')}</div>
-            <div>
+            <div className="pmj-agenda-day-title-block">
               <div style={{
                 fontFamily: 'Montserrat', fontSize: 10,
                 letterSpacing: '0.3em', fontWeight: 700,
@@ -181,7 +187,7 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
                 color: '#EEFFD7', textWrap: 'balance',
               }}>{cur.tagline}</h3>
             </div>
-            <div style={{
+            <div className="pmj-agenda-day-session-count" style={{
               fontFamily: 'Montserrat', fontSize: 11,
               letterSpacing: '0.22em', fontWeight: 700,
               color: 'rgba(238,255,215,.5)', textTransform: 'uppercase',
@@ -197,6 +203,7 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
               const isHover = hoverSess === i;
               return (
                 <li key={i}
+                  className="pmj-agenda-session-row"
                   onMouseEnter={() => setHoverSess(i)}
                   onMouseLeave={() => setHoverSess(null)}
                   style={{
@@ -209,7 +216,7 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
                     transition: 'background .25s',
                     position: 'relative',
                   }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <div className="pmj-agenda-session-time" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                     <span style={{
                       width: 6, height: 6, borderRadius: 999, background: color,
                       boxShadow: isHover ? `0 0 0 6px ${hexA(color, .18)}` : 'none',
@@ -248,20 +255,21 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
                     </div>
                   </div>
 
-                  <div style={{
+                  <div className="pmj-agenda-session-type" style={{
                     padding: '6px 14px', borderRadius: 999,
                     background: hexA(color, .15), border: `1px solid ${hexA(color, .35)}`,
                     fontFamily: 'Montserrat', fontSize: 10,
                     letterSpacing: '0.2em', fontWeight: 700,
                     color: color, textTransform: 'uppercase',
                     whiteSpace: 'nowrap',
+                    justifySelf: 'end',
                   }}>{s.type}</div>
                 </li>
               );
             })}
           </ul>
 
-          <div style={{
+          <div className="pmj-agenda-footer-nav" style={{
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
             padding: '20px 44px',
             borderTop: '1px solid rgba(238,255,215,.08)',
