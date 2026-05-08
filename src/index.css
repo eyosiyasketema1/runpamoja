@@ -157,6 +157,42 @@ button { font-family: inherit; }
   }
 }
 
+/* Hero Bold — additional mobile/tablet polish */
+@media (max-width: 1024px) {
+  .pmj-hero-vertical-tab {
+    display: none !important;
+  }
+}
+@media (max-width: 640px) {
+  .pmj-hero-meta-row {
+    gap: 24px !important;
+    margin-top: 24px !important;
+    margin-bottom: 16px !important;
+  }
+  .pmj-hero-bold-headline {
+    font-size: clamp(56px, 15vw, 120px) !important;
+    letter-spacing: -0.03em !important;
+  }
+  .pmj-hero-bold-africa {
+    padding-left: 8% !important;
+  }
+  .pmj-marquee-item {
+    padding-right: 32px !important;
+  }
+  .pmj-marquee-logo {
+    width: 48px !important;
+    height: 48px !important;
+    margin-left: 32px !important;
+  }
+}
+
+/* Nav — hide inline Register button on phones (duplicated in hamburger overlay) */
+@media (max-width: 640px) {
+  .pmj-nav-register-btn {
+    display: none !important;
+  }
+}
+
 .pmj-hero-conservative {
   grid-template-columns: 1.1fr 1fr;
 }

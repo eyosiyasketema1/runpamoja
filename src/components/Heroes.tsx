@@ -189,7 +189,7 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
         position: "absolute", inset: 0,
         background: "linear-gradient(180deg, rgba(92,135,39,.35) 0%, rgba(34,53,10,.15) 40%, rgba(10,16,2,.6) 100%)",
       }} />
-      <div style={{
+      <div className="pmj-hero-vertical-tab" style={{
         position: "absolute", right: 0, top: "42%", transform: "translateY(-50%)",
         writingMode: "vertical-rl",
         background: "#EA7F1D", color: "#fff",
@@ -204,7 +204,7 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
         minHeight: "min(100vh, 980px)",
         display: "flex", flexDirection: "column", justifyContent: "space-between",
       }}>
-        <div style={{ display: "flex", gap: 56, marginTop: 40, marginBottom: 24 }}>
+        <div className="pmj-hero-meta-row" style={{ display: "flex", gap: 56, marginTop: 40, marginBottom: 24, flexWrap: "wrap" }}>
           <div>
             <div style={{ fontFamily: "Montserrat", fontWeight: 600, fontSize: 15, lineHeight: 1.3, color: "#EEFFD7", letterSpacing: "0.02em" }}>
               27 Dec, 2027<br />— 2 Jan, 2028
@@ -217,9 +217,9 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
           </div>
         </div>
         <div style={{ marginTop: 8, marginBottom: 48 }}>
-          <h1 style={{
+          <h1 className="pmj-hero-bold-headline" style={{
             fontFamily: "Montserrat", fontWeight: 800, margin: 0,
-            fontSize: "clamp(72px, 13.5vw, 220px)",
+            fontSize: "clamp(64px, 13.5vw, 220px)",
             lineHeight: 0.86, letterSpacing: "-0.04em",
             color: "#EEFFD7",
             textShadow: "0 8px 40px rgba(0,0,0,.35)",
@@ -227,7 +227,7 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
           }}>
             ARISE
             <br/>
-            <span style={{ display: "inline-block", paddingLeft: "14%" }}>AFRICA</span>
+            <span className="pmj-hero-bold-africa" style={{ display: "inline-block", paddingLeft: "14%" }}>AFRICA</span>
           </h1>
         </div>
         <div style={{
@@ -311,13 +311,13 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
           willChange: "transform",
         }}>
           {[...marqueeItems, ...marqueeItems].map((w, i) => (
-            <span key={i} style={{ display: "inline-flex", alignItems: "center", paddingRight: 80 }}>
+            <span key={i} className="pmj-marquee-item" style={{ display: "inline-flex", alignItems: "center", paddingRight: 80 }}>
               <span className="pmj-marquee-text" style={{
                 fontFamily: "Montserrat", fontWeight: 800,
                 letterSpacing: "-0.03em", color: "#EEFFD7",
                 textTransform: "uppercase", lineHeight: 1,
               }}>{w}</span>
-              <span aria-hidden style={{
+              <span aria-hidden className="pmj-marquee-logo" style={{
                 display: "inline-block", width: 96, height: 96, marginLeft: 80,
                 background: `url(/assets/africa_logo.png) center / contain no-repeat`,
               }} />
