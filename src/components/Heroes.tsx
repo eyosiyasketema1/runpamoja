@@ -236,8 +236,8 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
           gap: 64, alignItems: "start",
           paddingTop: 36,
         }} className="pmj-hero-bold-grid">
-          <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
-            <a href="#speakers" style={{ textDecoration: "none", color: "inherit", display: "inline-flex", alignItems: "center", gap: 18 }}>
+          <div className="pmj-hero-left-col" style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+            <a href="#speakers" className="pmj-hero-speakers" style={{ textDecoration: "none", color: "inherit", display: "inline-flex", alignItems: "center", gap: 18 }}>
               <div style={{ display: "flex" }}>
                 {speakerAvatars.map((sp, i) => (
                   <div key={i} style={{
@@ -267,12 +267,12 @@ export function HeroBold({ accent, onRegister, data }: HeroProps) {
                 }}><IconArrow size={14} /></span>
               </div>
             </a>
-            <div style={{ display: "flex", gap: 40, flexWrap: "wrap", fontFamily: "Montserrat", fontSize: 13, fontWeight: 600, letterSpacing: "0.1em", color: "rgba(238,255,215,.85)", textTransform: "uppercase" }}>
+            <div className="pmj-hero-contact-row" style={{ display: "flex", gap: 40, flexWrap: "wrap", fontFamily: "Montserrat", fontSize: 13, fontWeight: 600, letterSpacing: "0.1em", color: "rgba(238,255,215,.85)", textTransform: "uppercase" }}>
               <span>+251 11 551 0044</span>
               <span>HELLO@PAMOJA.AFRICA</span>
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 22, maxWidth: 460 }}>
+          <div className="pmj-hero-right-col" style={{ display: "flex", flexDirection: "column", gap: 22, maxWidth: 460 }}>
             <h2 style={{
               fontFamily: "Montserrat", fontWeight: 700, fontSize: 22,
               letterSpacing: "0.04em", color: "#EEFFD7", margin: 0,

@@ -170,11 +170,31 @@ button { font-family: inherit; }
     margin-bottom: 16px !important;
   }
   .pmj-hero-bold-headline {
-    font-size: clamp(56px, 15vw, 120px) !important;
-    letter-spacing: -0.03em !important;
+    font-size: clamp(80px, 22vw, 180px) !important;
+    letter-spacing: -0.04em !important;
+    line-height: 0.88 !important;
   }
   .pmj-hero-bold-africa {
-    padding-left: 8% !important;
+    padding-left: 0 !important;
+  }
+  /* Mobile: hide speakers callout, move right column above left so contact info lands below the Register button */
+  .pmj-hero-speakers {
+    display: none !important;
+  }
+  .pmj-hero-bold-grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .pmj-hero-right-col {
+    order: 0 !important;
+  }
+  .pmj-hero-left-col {
+    order: 1 !important;
+    gap: 24px !important;
+  }
+  .pmj-hero-contact-row {
+    flex-direction: column !important;
+    gap: 12px !important;
   }
   .pmj-marquee-item {
     padding-right: 32px !important;
