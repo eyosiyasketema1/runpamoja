@@ -111,10 +111,11 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
           <span>· {schedule.sub}</span>
         </div>
 
+        <div className="pmj-agenda-strip-wrap" style={{ position: 'relative', marginBottom: 40 }}>
         <div ref={stripRef} className="pmj-agenda-day-strip" style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${days.length}, minmax(0, 1fr))`,
-          gap: 8, marginBottom: 40,
+          gap: 8,
         }}>
           {days.map((d, i) => {
             const active = dayIdx === i;
@@ -156,6 +157,17 @@ function Agenda({ data, accent: _accent }: { data: PamojaData; accent: string })
               </button>
             );
           })}
+        </div>
+        <div className="pmj-agenda-strip-hint" aria-hidden style={{
+          marginTop: 12, fontFamily: 'Montserrat', fontSize: 10,
+          letterSpacing: '0.24em', fontWeight: 700,
+          color: 'rgba(34,53,10,.55)', textTransform: 'uppercase',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          <span>Swipe for all {days.length} days</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
         </div>
 
         <div key={conf + '-' + dayIdx} className="pmj-agenda-day-card" style={{

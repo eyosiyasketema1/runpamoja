@@ -274,6 +274,10 @@ button { font-family: inherit; }
    Desktop: single sticky panel on the right.
    Tablet/mobile: each list item expands inline below itself when active. */
 .pmj-obj-mobile-detail { display: none; }
+.pmj-agenda-strip-hint { display: none; }
+@media (max-width: 1024px) {
+  .pmj-agenda-strip-hint { display: flex !important; }
+}
 @media (max-width: 1024px) {
   .pmj-obj-mobile-detail {
     display: block !important;
@@ -313,16 +317,35 @@ button { font-family: inherit; }
     gap: 10px !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
-    padding-bottom: 8px !important;
+    padding-bottom: 14px !important;
     margin-left: -16px !important;
     margin-right: -16px !important;
     padding-left: 16px !important;
-    padding-right: 16px !important;
-    scrollbar-width: none !important;
+    padding-right: 60px !important; /* leaves room for the right fade to feel like "peek" */
     scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(34,53,10,.45) rgba(34,53,10,.06);
   }
   .pmj-agenda-day-strip::-webkit-scrollbar {
-    display: none;
+    height: 4px;
+  }
+  .pmj-agenda-day-strip::-webkit-scrollbar-track {
+    background: rgba(34,53,10,.06);
+    border-radius: 4px;
+  }
+  .pmj-agenda-day-strip::-webkit-scrollbar-thumb {
+    background: rgba(34,53,10,.45);
+    border-radius: 4px;
+  }
+  /* Right-edge fade to telegraph "more days are over there" */
+  .pmj-agenda-strip-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 14px; right: 0;
+    width: 56px;
+    background: linear-gradient(to right, rgba(238,255,215,0) 0%, rgba(238,255,215,1) 80%);
+    pointer-events: none;
+    z-index: 2;
   }
   .pmj-agenda-day-strip > button {
     flex: 0 0 96px !important;
