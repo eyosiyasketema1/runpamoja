@@ -224,11 +224,15 @@ button { font-family: inherit; }
      placed between the headline and the text columns. Hide the empty middle grid cell so
      the two text blocks sit closer together. Verse left-aligns. */
   .pmj-vision-bgimg {
-    position: static !important;
+    position: relative !important;
     inset: auto !important;
-    width: 100% !important;
+    display: block !important;
+    width: 130vw !important;
+    max-width: none !important;
     height: auto !important;
-    margin: 24px 0 8px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 32px 0 16px !important;
     object-fit: contain !important;
   }
   .pmj-vision-bg {
