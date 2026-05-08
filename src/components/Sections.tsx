@@ -32,7 +32,7 @@ function WhatIs({ data, accent }: { data: PamojaData; accent: string }) {
     <section id="about" className="pmj-section" style={{ background: '#EEFFD7', color: '#22350A', position: 'relative' }}>
       <DotGrid color="rgba(34,53,10,.08)" gap={22} />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 80, alignItems: 'start' }} className="pmj-whatIs-grid">
-        <div style={{ position: 'sticky', top: 120 }}>
+        <div className="pmj-sticky-col" style={{ position: 'sticky', top: 120 }}>
           <SectionHeader kicker="About" title={data.whatIs.title} accent={'#5C8727'} />
         </div>
         <div>
@@ -341,7 +341,7 @@ function Objectives({ data, accent }: { data: PamojaData; accent: string }) {
             })}
           </ol>
 
-          <div style={{
+          <div className="pmj-sticky-col" style={{
             position: 'sticky', top: 120,
             padding: '40px 0',
           }}>

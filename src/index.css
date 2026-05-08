@@ -213,6 +213,24 @@ button { font-family: inherit; }
   }
 }
 
+/* Disable sticky positioning when grids stack on tablet/mobile — prevents overlap */
+@media (max-width: 1024px) {
+  .pmj-sticky-col {
+    position: static !important;
+    top: auto !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width: 640px) {
+  /* Section titles — scale down on phones so they don't dominate the screen */
+  .pmj-section h2,
+  .pmj-section h1 {
+    font-size: clamp(32px, 8vw, 44px) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.02em !important;
+  }
+}
+
 .pmj-hero-conservative {
   grid-template-columns: 1.1fr 1fr;
 }
